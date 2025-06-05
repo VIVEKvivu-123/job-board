@@ -1,7 +1,7 @@
-// server/routes/jobs.js
 const express = require("express");
 const router = express.Router();
-const Job = require("../models/Job");
+const Job = require("../models/job"); // ✅ Corrected import
+
 
 router.get("/", async (req, res) => {
   try {
@@ -10,9 +10,11 @@ router.get("/", async (req, res) => {
     const jobs = await Job.find(filter);
     res.json(jobs);
   } catch (error) {
+    console.error("Error fetching jobs:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
+
 
 router.post("/", async (req, res) => {
   try {
@@ -20,6 +22,7 @@ router.post("/", async (req, res) => {
     await newJob.save();
     res.status(201).json(newJob);
   } catch (error) {
+    console.error("Error creating job:", error);
     res.status(400).json({ error: "Failed to create job" });
   }
 });
