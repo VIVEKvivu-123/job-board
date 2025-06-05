@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/jobBoard", {
+mongoose.connect("mongodb+srv://VIVEKM:VivekIVwfn@cluster0.3nduk.mongodb.net/jobBoard", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
