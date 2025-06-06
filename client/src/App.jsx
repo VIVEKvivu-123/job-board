@@ -8,7 +8,7 @@ import JobForm from './components/JobForm';
 import Footer from './components/Footer';
 
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://job-board-5-z9nl.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'http//localhost port 5000';
 
 const App = () => {
   const [jobs, setJobs] = useState([]);
