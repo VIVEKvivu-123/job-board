@@ -7,6 +7,9 @@ import JobList from './components/JobList';
 import JobForm from './components/JobForm';
 import Footer from './components/Footer';
 
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const App = () => {
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
@@ -14,10 +17,10 @@ const App = () => {
   const [filterCategory, setFilterCategory] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
 
- 
+  
   const fetchJobs = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/jobs');
+      const res = await axios.get(`${API_URL}/jobs`);
       setJobs(res.data);
       setFilteredJobs(res.data);
     } catch (error) {
@@ -30,9 +33,9 @@ const App = () => {
   }, []);
 
   
-  const handlePostJob = async jobData => {
+  const handlePostJob = async (jobData) => {
     try {
-      await axios.post('http://localhost:5000/jobs', jobData);
+      await axios.post(`${API_URL}/jobs`, jobData);
       setShowForm(false);
       fetchJobs();
     } catch (error) {
@@ -41,18 +44,18 @@ const App = () => {
     }
   };
 
- 
+  
   useEffect(() => {
     let filtered = [...jobs];
 
     if (filterCategory) {
-      filtered = filtered.filter(job => job.category === filterCategory);
+      filtered = filtered.filter((job) => job.category === filterCategory);
     }
 
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
       filtered = filtered.filter(
-        job =>
+        (job) =>
           job.title.toLowerCase().includes(term) ||
           job.company.toLowerCase().includes(term)
       );
@@ -64,7 +67,6 @@ const App = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header onPostJobClick={() => setShowForm(true)} />
-
       <Hero onSearch={setSearchTerm} />
 
       <section id="jobs" className="container mx-auto px-4 py-8 flex flex-col">
@@ -75,7 +77,7 @@ const App = () => {
           <select
             id="category"
             value={filterCategory}
-            onChange={e => setFilterCategory(e.target.value)}
+            onChange={(e) => setFilterCategory(e.target.value)}
             className="border rounded p-2"
           >
             <option value="">All</option>
@@ -85,6 +87,7 @@ const App = () => {
             <option value="Sales">Sales</option>
             <option value="Finance">Finance</option>
           </select>
+
           {filterCategory && (
             <button
               onClick={() => setFilterCategory('')}
@@ -101,10 +104,7 @@ const App = () => {
       <Footer />
 
       {showForm && (
-        <JobForm
-          onSubmit={handlePostJob}
-          onClose={() => setShowForm(false)}
-        />
+        <JobForm onSubmit={handlePostJob} onClose={() => setShowForm(false)} />
       )}
     </div>
   );
