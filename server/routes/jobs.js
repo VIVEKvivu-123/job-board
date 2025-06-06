@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Job = require("../models/Job");
 
-// GET jobs (optionally filtered by category)
 router.get("/", async (req, res) => {
   try {
     const { category } = req.query;
@@ -15,7 +14,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// POST job
 router.post("/", async (req, res) => {
   try {
     const newJob = new Job(req.body);
