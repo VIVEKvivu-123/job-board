@@ -14,7 +14,7 @@ const App = () => {
   const [filterCategory, setFilterCategory] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Fetch jobs from backend
+ 
   const fetchJobs = async () => {
     try {
       const res = await axios.get('http://localhost:5000/jobs');
@@ -29,7 +29,7 @@ const App = () => {
     fetchJobs();
   }, []);
 
-  // Handle job posting form submission
+  
   const handlePostJob = async jobData => {
     try {
       await axios.post('http://localhost:5000/jobs', jobData);
@@ -41,7 +41,7 @@ const App = () => {
     }
   };
 
-  // Filter jobs by category and search term
+ 
   useEffect(() => {
     let filtered = [...jobs];
 

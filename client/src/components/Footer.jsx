@@ -16,7 +16,7 @@ const Footer = () => {
         </a>
       </div>
       <div className="mt-4 space-x-3">
-        {/* Placeholder social icons */}
+       
         <a href="#" aria-label="Facebook" className="hover:text-gray-300">FB</a>
         <a href="#" aria-label="Twitter" className="hover:text-gray-300">TW</a>
         <a href="#" aria-label="LinkedIn" className="hover:text-gray-300">LI</a>
